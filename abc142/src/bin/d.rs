@@ -1,25 +1,25 @@
-fn euclid(a: usize, b: usize) -> usize {
-    if b == 0 {
-        return a;
-    }
+use num::Integer;
 
-    euclid(b, a % b)
-}
 fn main() {
     proconio::input! {
         (a,b): (usize,usize)
     }
 
-    let gcd = euclid(a, b);
+    let mut g = a.gcd(&b);
 
-    let mut ans = 0;
-
-    for i in 1..gcd {
-        let ss = euclid(ans, i);
-        if ss == 1 {
-            ans += 1
+    let mut ans = 1;
+    let mut i = 2;
+    while i * i <= g {
+        if g % i == 0 {
+            ans += 1;
+            while g % i == 0 {
+                g /= i;
+            }
         }
+        i += 1
     }
-
-    println!("{}", gcd)
+    if g > 1 {
+        ans += 1
+    }
+    println!("{}", ans)
 }
