@@ -7,7 +7,7 @@ fn main() {
     }
     let md = 998244353;
 
-    let mut g = vec![0; 100];
+    let mut g = vec![0; d.iter().max().unwrap() + 1];
 
     if d[0] != 0 {
         return println!("0");
@@ -22,9 +22,8 @@ fn main() {
     }
 
     let mut ans = 1;
-    let t = g.into_iter().filter(|&x| x != 0).collect::<Vec<usize>>();
-    for i in 1..t.len() {
-        ans *= pow(t[i - 1], t[i]);
+    for i in 1..g.len() {
+        ans *= pow(g[i - 1], g[i]);
         ans %= md;
     }
 
